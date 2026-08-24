@@ -1,173 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My CV & Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhrigu Das | Commerce & Finance Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #172554;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --badge-bg: #eff6ff;
+      --badge-text: #1d4ed8;
+      --radius: 10px;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f7f9fa;
-      color: #333;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
       line-height: 1.6;
+      padding: 30px 16px;
     }
 
-    .header {
-      background-color: #2c3e50;
+    .cv-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
       color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
+      padding: 40px 36px;
+      position: relative;
     }
 
-    .header h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
-    }
-
-    .header p {
-      margin: 0;
-      font-size: 16px;
-      color: #bdc3c7;
-    }
-
-    .contact-bar {
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .contact-bar span {
-      margin: 0 10px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 25px auto;
-      background: #ffffff;
-      padding: 30px 35px;
-      border: 1px solid #e1e8ed;
-      border-radius: 6px;
-    }
-
-    h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #ecf0f1;
-      padding-bottom: 6px;
-      margin-top: 25px;
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    h2:first-of-type {
-      margin-top: 0;
-    }
-
-    .item {
-      margin-bottom: 15px;
-    }
-
-    .item-header {
+    .header-top {
       display: flex;
       justify-content: space-between;
-      font-weight: bold;
-      color: #34495e;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .item-sub {
-      color: #7f8c8d;
-      font-size: 14px;
-      margin-bottom: 5px;
+    .name-title h1 {
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
     }
 
-    ul {
-      margin: 8px 0;
-      padding-left: 20px;
+    .name-title .subtitle {
+      color: #93c5fd;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    li {
-      margin-bottom: 6px;
-    }
-
-    .skills-list {
+    .contact-info {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      list-style: none;
-      padding: 0;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 0.92rem;
+      color: #e2e8f0;
     }
 
-    .skills-list li {
-      background-color: #ecf0f1;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 14px;
-      color: #2c3e50;
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-item a {
+      color: #e2e8f0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-action {
+      background: #ffffff;
+      color: #0f172a;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    /* Content Layout */
+    .cv-body {
+      padding: 36px;
+    }
+
+    section {
+      margin-bottom: 32px;
+    }
+
+    section:last-child {
       margin-bottom: 0;
     }
 
-    .footer {
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    p.summary {
+      color: #4b5563;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    /* Timeline & Cards */
+    .entry-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .entry-header h3 {
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .entry-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #15803d;
+      background: #dcfce7;
+      padding: 3px 8px;
+      border-radius: 9999px;
+    }
+
+    .entry-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .entry-desc {
+      margin-top: 8px;
+      font-size: 0.92rem;
+      color: #4b5563;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .skill-pill {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* Footer */
+    footer {
       text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      color: #888;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Print-Friendly Styles */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+
+      .cv-wrapper {
+        box-shadow: none;
+        border: none;
+        max-width: 100%;
+      }
+
+      .btn-action, footer {
+        display: none !important;
+      }
+
+      header {
+        background: #1e3a8a !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-top {
+        flex-direction: column;
+      }
+      .cv-body {
+        padding: 24px 18px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>BHRIGU DAS </h1>
-    <p> COMMERCE  /  FINANCE</p>
-    <div class="contact-bar">
-      <span>📧bhrigudas.work.com</span>
-      <span>📍 (Baksa/Nalbari) ,Assam , India</span>
-    </div>
-  </div>
-
-  <div class="container">
-    
-    <h2>MY Profile <h2>
-    <p>
-      A Person who is dedicated to his Work...💻
-    </p>
-
-    <h2>Work Experience</h2>
-    <div class="item">
-      </ul>
-    </div>
-
-    <div class="item">
-      <div class="item-header">
-        <span>NONE</span>
-        <span></span>
+  <div class="cv-wrapper">
+    <header>
+      <div class="header-top">
+        <div class="name-title">
+          <h1>Bhrigu Das</h1>
+          <div class="subtitle">Commerce & Finance Specialist</div>
+        </div>
+        <button class="btn-action" onclick="window.print()">
+          🖨 Print / Save PDF
+        </button>
       </div>
-      <ul>
-      </ul>
-    </div>
 
-    <h2>Education</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>BACHELORS COMMERCE ( CURRENT )</span>
-        <span>2025– Present </span>
+      <div class="contact-info">
+        <span class="contact-item">📧 <a href="mailto:bhrigudas.work@gmail.com">bhrigudas.work@gmail.com</a></span>
+        <span class="contact-item">📍 Baksa / Nalbari, Assam, India</span>
+        <span class="contact-item">🌐 Open for Opportunities</span>
       </div>
-      <div class="item-sub">TIHU COLLEGE, TIHU</div>
+    </header>
+
+    <div class="cv-body">
+
+      <section>
+        <div class="section-title">Profile Overview</div>
+        <p class="summary">
+          Motivated and detail-oriented Commerce student with strong foundations in financial accounting, business analytics, and strategic planning. Dedicated to applying core financial principles to solve practical operational problems and support organizational efficiency.
+        </p>
+      </section>
+
+      <section>
+        <div class="section-title">Education</div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <h3>Bachelor of Commerce (B.Com)</h3>
+            <span class="entry-badge">2025 – Present</span>
+          </div>
+          <div class="entry-sub">Tihu College — Tihu, Assam</div>
+          <p class="entry-desc">Focusing on financial accounting, commercial arithmetic, taxation principles, and business management.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">Core Competencies & Skills</div>
+        <ul class="skills-grid">
+          <li class="skill-pill">Financial Accounting</li>
+          <li class="skill-pill">Data & Record Management</li>
+          <li class="skill-pill">MS Excel & Office Suite</li>
+          <li class="skill-pill">Project Coordination</li>
+          <li class="skill-pill">Critical Problem Solving</li>
+          <li class="skill-pill">Team Collaboration</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="section-title">Academic & Extra-Curricular Projects</div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <h3>Commerce & Market Research</h3>
+            <span class="entry-sub">Academic Initiative</span>
+          </div>
+          <p class="entry-desc">Conducting foundational analysis on local market trades, budgeting methods, and basic ledger maintenance.</p>
+        </div>
+      </section>
+
     </div>
-
-    <h2>Key Skills</h2>
-    <ul class="skills-list">
-      <li>Project Management</li>
-      <li>Team Leadership</li>
-      <li>Problem Solving</li>
-    </ul>
-
   </div>
 
-  <div class="footer">
-    &copy; 2026 Bhrigu. All rights reserved.
-  </div>
+  <footer>
+    &copy; 2026 Bhrigu Das. Professional CV.
+  </footer>
 
 </body>
-    </html>
-      
+</html>
