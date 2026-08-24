@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bhrigu Das | Launching Soon</title>
+  <title>Bhrigu Das | Project Gaav Launch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #07090e;
@@ -18,6 +18,8 @@
       --text-muted: #94a3b8;
       --accent: #38bdf8;
       --accent-glow: rgba(56, 189, 248, 0.35);
+      --gaav-accent: #34d399;
+      --gaav-glow: rgba(52, 211, 153, 0.35);
     }
 
     * {
@@ -25,6 +27,12 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -46,6 +54,8 @@
       filter: blur(120px);
       z-index: 0;
       pointer-events: none;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .mesh-1 {
@@ -59,12 +69,44 @@
     .mesh-2 {
       width: 400px;
       height: 400px;
-      background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%);
+      background: radial-gradient(circle, #059669 0%, rgba(5, 150, 105, 0) 70%);
       bottom: -50px;
       right: 10%;
     }
 
-    /* Countdown Glass Container */
+    /* Top Corner Live Clock */
+    .top-clock-widget {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 10;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+    }
+
+    .clock-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 1.8s infinite;
+    }
+
+    /* Glass Master Box */
     .glass-box {
       position: relative;
       z-index: 1;
@@ -80,6 +122,7 @@
         inset 0 1px 1px var(--glass-highlight);
       padding: 48px 32px;
       text-align: center;
+      transform: translateZ(0);
     }
 
     .status-badge {
@@ -113,23 +156,58 @@
     }
 
     h1 {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    p.subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 36px;
-      line-height: 1.5;
+    /* PROJECT GAAV Highlight Pill */
+    .gaav-highlight-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.16), rgba(56, 189, 248, 0.1));
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      box-shadow: 0 0 25px var(--gaav-glow);
+      padding: 8px 22px;
+      border-radius: 12px;
+      margin-bottom: 34px;
+      animation: gaavBorderGlow 3s ease-in-out infinite alternate;
     }
 
-    /* Timer Grid */
+    @keyframes gaavBorderGlow {
+      0% {
+        border-color: rgba(52, 211, 153, 0.35);
+        box-shadow: 0 0 16px rgba(52, 211, 153, 0.15);
+      }
+      100% {
+        border-color: rgba(52, 211, 153, 0.8);
+        box-shadow: 0 0 32px rgba(52, 211, 153, 0.4);
+      }
+    }
+
+    .gaav-title {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
+    }
+
+    .gaav-status {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #a7f3d0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* Jitter-Free Timer Grid */
     .timer-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -143,6 +221,7 @@
       border-radius: 18px;
       padding: 18px 8px;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      transition: border-color 0.2s ease;
     }
 
     .number {
@@ -151,6 +230,7 @@
       font-weight: 700;
       color: #ffffff;
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
       text-shadow: 0 0 20px var(--accent-glow);
     }
 
@@ -171,10 +251,22 @@
 
     @media (max-width: 550px) {
       .glass-box {
-        padding: 32px 18px;
+        padding: 32px 16px;
       }
       h1 {
         font-size: 1.85rem;
+      }
+      .gaav-highlight-wrapper {
+        padding: 6px 14px;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 26px;
+      }
+      .gaav-title {
+        font-size: 0.88rem;
+      }
+      .gaav-status {
+        font-size: 0.72rem;
       }
       .timer-grid {
         gap: 8px;
@@ -185,22 +277,42 @@
       .label {
         font-size: 0.65rem;
       }
+      .top-clock-widget {
+        top: 12px;
+        right: 12px;
+        font-size: 0.72rem;
+        padding: 5px 10px;
+      }
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
+
+  <!-- Live Top Corner Mini Clock -->
+  <div class="top-clock-widget">
+    <span class="clock-dot"></span>
+    <span id="live-corner-time">--:--:-- --</span>
+  </div>
 
   <div class="mesh-glow mesh-1"></div>
   <div class="mesh-glow mesh-2"></div>
 
+  <!-- Background Looping Audio (Hidden UI) -->
+  <audio id="bg-audio" loop autoplay muted playsinline src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3?filename=cinematic-time-lapse-115672.mp3"></audio>
+
   <main class="glass-box">
     
     <div class="status-badge">
-      <span class="pulse-dot"></span> BHRIGU 
+      <span class="pulse-dot"></span> BHRIGU
     </div>
 
     <h1>COMING SOON</h1>
-    <p class="subtitle">PROJECT GAAV UNDER DEVELOPMENT</p>
+
+    <!-- Highlighted PROJECT GAAV Element -->
+    <div class="gaav-highlight-wrapper">
+      <span class="gaav-title">PROJECT GAAV</span>
+      <span class="gaav-status">&bull; Under Development</span>
+    </div>
 
     <div class="timer-grid" id="countdown">
       <div class="timer-unit">
@@ -215,21 +327,85 @@
         <div class="number" id="minutes">00</div>
         <div class="label">Minutes</div>
       </div>
-      <div class="timer-unit">
+      <div class="timer-unit" id="sec-card">
         <div class="number" id="seconds">00</div>
         <div class="label">Seconds</div>
       </div>
     </div>
 
     <div class="footer-text">
-      Target Launch: <strong>16 October2026</strong>
+      Target Launch: <strong>16 October 2026</strong>
     </div>
 
   </main>
 
   <script>
-    // Target: 16 October 2026 00:00:00
-    const targetDate = new Date('October 16 , 2026 00:00:00').getTime();
+    // 1. Live Top Corner Time
+    function updateLiveClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+      const clockEl = document.getElementById('live-corner-time');
+      if (clockEl) clockEl.textContent = timeStr;
+    }
+    updateLiveClock();
+    setInterval(updateLiveClock, 1000);
+
+    // 2. Hidden Audio & Mechanical Clock Tick
+    const audio = document.getElementById('bg-audio');
+    let audioCtx = null;
+    let soundActive = false;
+
+    function playTick() {
+      if (!soundActive || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1500, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.02);
+
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.025);
+      } catch (e) {}
+    }
+
+    function autoStartAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      soundActive = true;
+      audio.muted = false;
+      audio.volume = 0.35;
+      audio.play().catch(() => {});
+
+      ['mousemove', 'scroll', 'touchstart', 'keydown', 'wheel'].forEach(evt => {
+        window.removeEventListener(evt, autoStartAudio);
+      });
+    }
+
+    window.addEventListener('load', () => {
+      audio.play().catch(() => {});
+      ['mousemove', 'scroll', 'touchstart', 'keydown', 'wheel'].forEach(evt => {
+        window.addEventListener(evt, autoStartAudio, { once: true });
+      });
+    });
+
+    // 3. Glitch-Free Countdown to 16 October 2026
+    const targetDate = new Date('October 16, 2026 00:00:00').getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -253,6 +429,8 @@
       document.getElementById('hours').textContent = String(hours).padStart(2, '0');
       document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
       document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+      playTick();
     }
 
     updateCountdown();
