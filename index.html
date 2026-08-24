@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bhrigu Das | Executive Liquid Glass CV</title>
+  <title>Bhrigu Das | Launching Soon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #07090e;
       --glass-surface: rgba(255, 255, 255, 0.05);
-      --glass-card: rgba(255, 255, 255, 0.07);
+      --glass-card: rgba(255, 255, 255, 0.08);
       --glass-border: rgba(255, 255, 255, 0.14);
-      --glass-border-hover: rgba(56, 189, 248, 0.45);
       --glass-highlight: rgba(255, 255, 255, 0.35);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.25);
-      --accent-purple: #818cf8;
+      --accent-glow: rgba(56, 189, 248, 0.35);
     }
 
     * {
@@ -27,7 +25,6 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
     }
 
     body {
@@ -37,12 +34,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 48px 16px;
+      padding: 24px;
       position: relative;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
-    /* Animated Liquid Mesh Gradients */
+    /* Ambient Lighting */
     .mesh-glow {
       position: fixed;
       border-radius: 50%;
@@ -52,480 +49,215 @@
     }
 
     .mesh-1 {
-      width: 500px;
-      height: 500px;
+      width: 450px;
+      height: 450px;
       background: radial-gradient(circle, #2563eb 0%, rgba(37, 99, 235, 0) 70%);
-      top: -100px;
-      left: 5%;
-      animation: float1 16s ease-in-out infinite alternate;
+      top: -50px;
+      left: 10%;
     }
 
     .mesh-2 {
-      width: 460px;
-      height: 460px;
+      width: 400px;
+      height: 400px;
       background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%);
-      bottom: -100px;
-      right: 5%;
-      animation: float2 20s ease-in-out infinite alternate;
+      bottom: -50px;
+      right: 10%;
     }
 
-    .mesh-3 {
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, #0284c7 0%, rgba(2, 132, 199, 0) 70%);
-      top: 40%;
-      left: 60%;
-      animation: float1 12s ease-in-out infinite alternate-reverse;
-    }
-
-    @keyframes float1 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, 80px) scale(1.1); }
-    }
-
-    @keyframes float2 {
-      0% { transform: translate(0, 0) scale(1.05); }
-      100% { transform: translate(-70px, -50px) scale(0.95); }
-    }
-
-    /* Master Glass Container */
-    .glass-container {
+    /* Countdown Glass Container */
+    .glass-box {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 900px;
+      max-width: 680px;
       background: var(--glass-surface);
-      backdrop-filter: blur(30px) saturate(200%);
-      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
       border: 1px solid var(--glass-border);
-      border-radius: 28px;
+      border-radius: 24px;
       box-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.6),
-        inset 0 1px 1px var(--glass-highlight),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.05);
-      padding: 48px;
+        0 25px 60px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px var(--glass-highlight);
+      padding: 48px 32px;
+      text-align: center;
     }
 
-    /* Header */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--glass-border);
-      position: relative;
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
-    .title-group h1 {
-      font-size: 2.5rem;
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-size: 2.4rem;
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
       background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .role-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 6px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-    }
-
-    .role-badge::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-    }
-
-    .contact-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .chip {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
-      padding: 7px 14px;
-      border-radius: 12px;
-      font-size: 0.84rem;
+    p.subtitle {
       color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.25s ease;
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+      line-height: 1.5;
     }
 
-    .chip:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--accent);
-      color: var(--text-main);
-    }
-
-    .chip a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .chip svg {
-      width: 14px;
-      height: 14px;
-      stroke: var(--accent);
-    }
-
-    .btn-glass {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
-      color: #ffffff;
-      border: 1px solid var(--glass-highlight);
-      padding: 12px 22px;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 0.88rem;
-      cursor: pointer;
-      backdrop-filter: blur(14px);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-glass svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .btn-glass:hover {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(255, 255, 255, 0.1));
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px var(--accent-glow);
-    }
-
-    /* Content Layout */
-    .content {
-      margin-top: 36px;
+    /* Timer Grid */
+    .timer-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 36px;
     }
 
-    .section-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--glass-border), transparent);
-    }
-
-    .summary-text {
-      color: #cbd5e1;
-      line-height: 1.75;
-      font-size: 0.96rem;
-      font-weight: 400;
-    }
-
-    /* Glass Cards */
-    .glass-card {
+    .timer-unit {
       background: var(--glass-card);
       border: 1px solid var(--glass-border);
       border-radius: 18px;
-      padding: 22px;
-      backdrop-filter: blur(16px);
-      transition: all 0.3s ease;
+      padding: 18px 8px;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
     }
 
-    .glass-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    }
-
-    .glass-card:hover {
-      border-color: var(--glass-border-hover);
-      background: rgba(255, 255, 255, 0.09);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .card-title {
-      font-size: 1.08rem;
-      font-weight: 600;
+    .number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 700;
       color: #ffffff;
+      line-height: 1.1;
+      text-shadow: 0 0 20px var(--accent-glow);
     }
 
-    .badge-glow {
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 0.76rem;
+    .label {
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-top: 6px;
     }
 
-    .card-sub {
-      color: var(--accent-purple);
-      font-size: 0.88rem;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .card-desc {
-      color: #cbd5e1;
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    /* Skills Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .skill-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--glass-border);
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.25s ease;
-    }
-
-    .skill-card svg {
-      width: 16px;
-      height: 16px;
-      stroke: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .skill-card:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--accent);
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    .footer-text {
       color: #64748b;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       letter-spacing: 0.04em;
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
-      .glass-container {
-        padding: 24px;
-        border-radius: 20px;
+    @media (max-width: 550px) {
+      .glass-box {
+        padding: 32px 18px;
       }
-      .title-group h1 {
-        font-size: 2rem;
+      h1 {
+        font-size: 1.85rem;
       }
-      .btn-glass {
-        width: 100%;
-        justify-content: center;
+      .timer-grid {
+        gap: 8px;
       }
-    }
-
-    /* Print Clean Rules */
-    @media print {
-      body {
-        background: #ffffff !important;
-        color: #0f172a !important;
-        padding: 0;
+      .number {
+        font-size: 1.6rem;
       }
-      .mesh-glow, .btn-glass, footer {
-        display: none !important;
-      }
-      .glass-container {
-        background: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        backdrop-filter: none !important;
-      }
-      .title-group h1 {
-        -webkit-text-fill-color: #0f172a !important;
-      }
-      .role-badge, .card-sub {
-        color: #0369a1 !important;
-      }
-      .chip, .glass-card, .skill-card {
-        background: none !important;
-        border: 1px solid #e2e8f0 !important;
-        color: #1e293b !important;
-        box-shadow: none !important;
-      }
-      .card-title, .section-title {
-        color: #0f172a !important;
-      }
-      .card-desc, .summary-text {
-        color: #475569 !important;
+      .label {
+        font-size: 0.65rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Light Orbs -->
   <div class="mesh-glow mesh-1"></div>
   <div class="mesh-glow mesh-2"></div>
-  <div class="mesh-glow mesh-3"></div>
 
-  <!-- Master Glass CV Card -->
-  <main class="glass-container">
+  <main class="glass-box">
     
-    <header class="header">
-      <div class="title-group">
-        <h1>Bhrigu Das</h1>
-        <div class="role-badge">Commerce &amp; Financial Accounting</div>
-        
-        <div class="contact-chips">
-          <span class="chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <a href="mailto:bhrigudas.work@gmail.com">bhrigudas.work@gmail.com</a>
-          </span>
-          <span class="chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Baksa / Nalbari, Assam
-          </span>
-        </div>
-      </div>
-
-      <button class="btn-glass" onclick="window.print()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Save as PDF
-      </button>
-    </header>
-
-    <div class="content">
-
-      <!-- Summary -->
-      <section>
-        <div class="section-title">Executive Summary</div>
-        <p class="summary-text">
-          Dedicated Commerce undergraduate with strong fundamentals in financial accounting, commercial mathematics, and record auditing. Analytical, structured, and passionate about leveraging spreadsheet automation to deliver streamlined financial reporting.
-        </p>
-      </section>
-
-      <!-- Education -->
-      <section>
-        <div class="section-title">Education</div>
-        <div class="glass-card">
-          <div class="card-top">
-            <span class="card-title">Bachelor of Commerce (B.Com)</span>
-            <span class="badge-glow">2025 – Present</span>
-          </div>
-          <div class="card-sub">Tihu College — Tihu, Assam</div>
-          <p class="card-desc">
-            Core focus on Financial Accounting, Micro &amp; Macro Economics, Business Mathematics, and Corporate Principles of Management.
-          </p>
-        </div>
-      </section>
-
-      <!-- Key Competencies -->
-      <section>
-        <div class="section-title">Core Competencies</div>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            Financial Accounting
-          </div>
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-            MS Excel &amp; Spreadsheets
-          </div>
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            General Ledger &amp; Auditing
-          </div>
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Business Mathematics
-          </div>
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            Problem Solving
-          </div>
-          <div class="skill-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Team Collaboration
-          </div>
-        </div>
-      </section>
-
-      <!-- Practical Work & Projects -->
-      <section>
-        <div class="section-title">Practical Experience &amp; Projects</div>
-        <div class="glass-card">
-          <div class="card-top">
-            <span class="card-title">Commercial Case Studies &amp; Ledger Automation</span>
-            <span class="badge-glow">Academic Portfolio</span>
-          </div>
-          <div class="card-sub">Self-Initiated Practical Works</div>
-          <p class="card-desc">
-            Conducted financial model evaluations of regional retail businesses, structured basic balance sheets, and built custom Excel-based ledger trackers for income and expenditure analysis.
-          </p>
-        </div>
-      </section>
-
+    <div class="status-badge">
+      <span class="pulse-dot"></span> BHRIGU 
     </div>
 
-    <footer>
-      &copy; 2026 Bhrigu Das &bull; Executive Glass Edition
-    </footer>
+    <h1>COMING SOON</h1>
+    <p class="subtitle">PROJECT GAAV UNDER DEVELOPMENT</p>
+
+    <div class="timer-grid" id="countdown">
+      <div class="timer-unit">
+        <div class="number" id="days">00</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="timer-unit">
+        <div class="number" id="hours">00</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="timer-unit">
+        <div class="number" id="minutes">00</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="timer-unit">
+        <div class="number" id="seconds">00</div>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+
+    <div class="footer-text">
+      Target Launch: <strong>16 October2026</strong>
+    </div>
 
   </main>
+
+  <script>
+    // Target: 16 October 2026 00:00:00
+    const targetDate = new Date('October 16 , 2026 00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        document.querySelector('.status-badge').innerHTML = '<span class="pulse-dot"></span> Ready for Deployment';
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 
 </body>
 </html>
