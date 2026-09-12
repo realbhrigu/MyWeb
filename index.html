@@ -1,594 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sakura Studio &mdash; Zen Focus</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    /* --- LUXURY ZEN PALETTE --- */
-    :root {
-      --bg-base: #09090b;
-      --surface-glass: rgba(18, 18, 22, 0.65);
-      --surface-glass-card: rgba(24, 24, 30, 0.5);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-highlight: rgba(255, 255, 255, 0.15);
-      --text-primary: #f4f4f6;
-      --text-secondary: #9494a0;
-      --text-tertiary: #585864;
-      --sakura-accent: #d48b94;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Sakura Wind Loop - Artistic Edition</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1b0c36, #4a3575, #7597de);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    body.silk-mode {
-      --bg-base: #f5f3ef;
-      --surface-glass: rgba(255, 255, 255, 0.7);
-      --surface-glass-card: rgba(255, 255, 255, 0.85);
-      --border-subtle: rgba(0, 0, 0, 0.08);
-      --border-highlight: rgba(0, 0, 0, 0.15);
-      --text-primary: #19181b;
-      --text-secondary: #6e6d78;
-      --text-tertiary: #a5a4af;
-      --sakura-accent: #b8626c;
-    }
+        .scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            /* Cinematic Vignette Border Effect */
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.7);
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-user-select: none;
-      user-select: none;
-    }
+        /* Anime Sunset Glow with Soft Pulse */
+        .sun {
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 140px;
+            height: 140px;
+            background: radial-gradient(circle, #ffecd2 0%, #fcb69f 70%, #ff8576 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 80px #fcb69f, 0 0 120px rgba(252, 182, 159, 0.4);
+            animation: sunGlow 5s ease-in-out infinite alternate;
+        }
 
-    body {
-      min-height: 100vh;
-      background-color: var(--bg-base);
-      color: var(--text-primary);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2.5rem 1.5rem;
-      position: relative;
-      overflow: hidden; /* Prevents scrollbar glitches */
-      transition: background-color 0.8s ease, color 0.8s ease;
-    }
+        /* Center Artistic Anime Title Card */
+        .anime-title-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
 
-    /* --- AMBIENT BLOOM --- */
-    .zen-glow {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(140px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.45;
-      transition: all 1s ease;
-    }
-    .zen-glow-1 {
-      width: 50vw; height: 50vw;
-      background: radial-gradient(circle, var(--sakura-accent) 0%, transparent 70%);
-      top: -10%; left: -10%;
-    }
-    .zen-glow-2 {
-      width: 45vw; height: 45vw;
-      background: radial-gradient(circle, #382c3c 0%, transparent 70%);
-      bottom: -15%; right: -10%;
-    }
-    body.silk-mode .zen-glow-2 { background: radial-gradient(circle, #ecd6d0 0%, transparent 70%); }
+        .anime-title {
+            color: #ffffff;
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 183, 197, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+            animation: titlePulse 4s ease-in-out infinite alternate;
+            margin: 0;
+        }
 
-    /* --- GPU-ACCELERATED SAKURA (Glitch Free) --- */
-    .sakura-stage {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
+        .anime-subtitle {
+            color: #ffb7c5;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(255, 183, 197, 0.6);
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
 
-    .petal {
-      position: absolute;
-      top: -10vh; /* Start hidden above */
-      background: linear-gradient(135deg, rgba(235, 172, 180, 0.85), rgba(212, 139, 148, 0.45));
-      border-radius: 12px 2px 12px 2px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      animation: fall linear infinite;
-    }
+        /* Floating Sakura Petals (More varieties added) */
+        .petal {
+            position: absolute;
+            background: #ffb7c5;
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite;
+            opacity: 0.85;
+            box-shadow: 0 0 5px rgba(255, 183, 197, 0.5);
+        }
 
-    @keyframes fall {
-      0% { transform: translateY(0) translateX(0) rotateZ(0deg) rotateY(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(115vh) translateX(40px) rotateZ(360deg) rotateY(360deg); opacity: 0; }
-    }
+        /* 15 Individual Petals with randomized timing */
+        .petal:nth-child(1) { left: 5%; width: 14px; height: 10px; animation-duration: 6s; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 15%; width: 10px; height: 7px; animation-duration: 4s; animation-delay: 2s; }
+        .petal:nth-child(3) { left: 25%; width: 16px; height: 12px; animation-duration: 7s; animation-delay: 1s; }
+        .petal:nth-child(4) { left: 35%; width: 12px; height: 8px; animation-duration: 5s; animation-delay: 3s; }
+        .petal:nth-child(5) { left: 45%; width: 15px; height: 11px; animation-duration: 6.5s; animation-delay: 0.5s; }
+        .petal:nth-child(6) { left: 55%; width: 11px; height: 8px; animation-duration: 4.5s; animation-delay: 2.5s; }
+        .petal:nth-child(7) { left: 65%; width: 13px; height: 9px; animation-duration: 5.5s; animation-delay: 4s; }
+        .petal:nth-child(8) { left: 75%; width: 10px; height: 7px; animation-duration: 7.5s; animation-delay: 1.5s; }
+        .petal:nth-child(9) { left: 85%; width: 15px; height: 10px; animation-duration: 5s; animation-delay: 3.5s; }
+        .petal:nth-child(10) { left: 92%; width: 12px; height: 8px; animation-duration: 6s; animation-delay: 0.8s; }
+        .petal:nth-child(11) { left: 10%; width: 11px; height: 7px; animation-duration: 4.8s; animation-delay: 1.2s; }
+        .petal:nth-child(12) { left: 30%; width: 14px; height: 10px; animation-duration: 6.2s; animation-delay: 2.8s; }
+        .petal:nth-child(13) { left: 60%; width: 9px; height: 6px; animation-duration: 4.2s; animation-delay: 3.2s; }
+        .petal:nth-child(14) { left: 80%; width: 15px; height: 11px; animation-duration: 7.2s; animation-delay: 0.3s; }
+        .petal:nth-child(15) { left: 95%; width: 12px; height: 9px; animation-duration: 5.8s; animation-delay: 2.1s; }
 
-    /* --- TOP BAR --- */
-    .top-header {
-      position: fixed;
-      top: 2rem;
-      width: calc(100% - 4rem);
-      max-width: 1000px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 20;
-    }
+        /* Magic Wind Sparkles / Dust */
+        .sparkle {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: sparkleFloat 3s linear infinite;
+            opacity: 0.6;
+        }
 
-    .brand-mark {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      letter-spacing: 0.28em;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-    .brand-kanji {
-      color: var(--sakura-accent);
-      border: 1px solid var(--border-subtle);
-      width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%;
-      background: var(--surface-glass-card);
-      font-size: 0.9rem;
-    }
+        .sparkle:nth-child(16) { left: 20%; top: 40%; width: 3px; height: 3px; animation-delay: 0s; }
+        .sparkle:nth-child(17) { left: 50%; top: 30%; width: 2px; height: 2px; animation-delay: 1s; }
+        .sparkle:nth-child(18) { left: 75%; top: 50%; width: 4px; height: 4px; animation-delay: 2s; }
+        .sparkle:nth-child(19) { left: 40%; top: 70%; width: 2px; height: 2px; animation-delay: 1.5s; }
 
-    .theme-toggle-btn {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--surface-glass-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-secondary);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .theme-toggle-btn:hover {
-      color: var(--text-primary);
-      border-color: var(--border-highlight);
-    }
+        /* Rich Anime Silhouette Branch */
+        .branch {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 550px;
+            height: 300px;
+            background: #130a21;
+            clip-path: polygon(100% 0, 75% 0, 35% 25%, 10% 55%, 0 62%, 0 72%, 15% 62%, 45% 35%, 85% 8%, 100% 8%);
+            box-shadow: inset 10px 10px 20px rgba(0,0,0,0.5);
+        }
 
-    /* --- WORKSPACE --- */
-    .workspace-wrapper {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 980px;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
+        /* Ground / Silhouette horizon with soft gradient line */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to top, #0b0514, #130a21);
+            border-top: 2px solid rgba(255, 183, 197, 0.1);
+        }
 
-    .zen-card {
-      background: var(--surface-glass);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--border-subtle);
-      border-top: 1px solid var(--border-highlight);
-      border-radius: 24px;
-      padding: 2.2rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-      display: flex; flex-direction: column;
-      transition: background 0.5s ease;
-    }
+        /* Keyframes */
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(120px) translateY(50vh) rotate(180deg);
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                transform: translateX(-60px) translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-    .card-meta {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
-    }
-    .card-title {
-      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600;
-      color: var(--text-secondary); display: flex; align-items: center; gap: 8px;
-    }
-    .status-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--sakura-accent);
-      box-shadow: 0 0 8px var(--sakura-accent);
-    }
+        @keyframes sunGlow {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.06); opacity: 1; box-shadow: 0 0 100px #fcb69f, 0 0 160px rgba(252, 182, 159, 0.6); }
+        }
 
-    /* --- TIMER --- */
-    .timer-segmented-control {
-      display: flex;
-      background: var(--surface-glass-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 4px; gap: 4px; margin-bottom: 1.5rem;
-    }
-    .segment-btn {
-      flex: 1; background: transparent; border: none; padding: 8px 0; border-radius: 8px;
-      font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.2s ease;
-    }
-    .segment-btn.active {
-      background: var(--surface-glass); color: var(--text-primary);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+        @keyframes titlePulse {
+            0% { text-shadow: 0 0 15px rgba(255, 183, 197, 0.6), 0 0 30px rgba(255, 255, 255, 0.3); transform: scale(1); }
+            100% { text-shadow: 0 0 25px rgba(255, 183, 197, 1), 0 0 50px rgba(255, 255, 255, 0.6); transform: scale(1.03); }
+        }
 
-    .timer-numeral {
-      font-family: 'JetBrains Mono', monospace; font-size: 4.8rem; font-weight: 300;
-      text-align: center; color: var(--text-primary); margin: 1rem 0 2rem; letter-spacing: -2px;
-    }
-
-    .timer-actions { display: flex; gap: 12px; justify-content: center; }
-    .primary-pill-btn {
-      flex: 1; max-width: 160px; height: 44px;
-      background: var(--text-primary); color: var(--bg-base);
-      border: none; border-radius: 100px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: transform 0.2s;
-    }
-    .primary-pill-btn:hover { transform: scale(1.03); }
-
-    .ghost-icon-btn {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--surface-glass-card); border: 1px solid var(--border-subtle);
-      color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .ghost-icon-btn:hover { color: var(--text-primary); border-color: var(--border-highlight); }
-
-    /* --- SOUNDSCAPE (FIXED AUDIO) --- */
-    .soundscape-module { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); }
-    .track-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .track-info { display: flex; flex-direction: column; gap: 2px; }
-    .track-title { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); }
-    .track-sub { font-size: 0.7rem; color: var(--text-tertiary); }
-
-    .sound-bars { display: flex; align-items: center; gap: 3px; height: 16px; opacity: 0; transition: opacity 0.3s; }
-    .sound-bars.playing { opacity: 1; }
-    .bar { width: 2px; height: 4px; background: var(--sakura-accent); border-radius: 2px; }
-    .playing .bar:nth-child(1) { animation: wave 0.8s infinite alternate; }
-    .playing .bar:nth-child(2) { animation: wave 1.2s infinite alternate 0.2s; }
-    .playing .bar:nth-child(3) { animation: wave 0.9s infinite alternate 0.4s; }
-    .playing .bar:nth-child(4) { animation: wave 1.1s infinite alternate 0.1s; }
-    @keyframes wave { to { height: 16px; } }
-
-    .player-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; }
-    .track-buttons { display: flex; align-items: center; gap: 12px; }
-    
-    .control-btn { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; }
-    .control-btn:hover { color: var(--text-primary); }
-    
-    .play-btn-wrapper {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--surface-glass-card); border: 1px solid var(--border-subtle);
-      color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .play-btn-wrapper:hover { background: var(--sakura-accent); color: #fff; border-color: var(--sakura-accent); }
-
-    .volume-group { display: flex; align-items: center; gap: 8px; }
-    .volume-range { -webkit-appearance: none; width: 75px; height: 3px; background: var(--border-subtle); border-radius: 4px; outline: none; }
-    .volume-range::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--text-secondary); cursor: pointer; }
-
-    /* --- TO-DO AGENDA --- */
-    .task-creation-bar {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--surface-glass-card); border: 1px solid var(--border-subtle);
-      border-radius: 14px; padding: 6px 6px 6px 14px; margin-bottom: 1.5rem; transition: border-color 0.3s ease;
-    }
-    .task-creation-bar:focus-within { border-color: var(--border-highlight); }
-    .task-creation-bar input { flex: 1; background: transparent; border: none; outline: none; color: var(--text-primary); font-size: 0.85rem; }
-    
-    .add-task-btn {
-      width: 34px; height: 34px; border-radius: 10px; background: var(--text-primary); color: var(--bg-base);
-      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
-
-    .task-stream { list-style: none; overflow-y: auto; max-height: 400px; display: flex; flex-direction: column; gap: 8px; padding-right: 5px; }
-    .task-stream::-webkit-scrollbar { width: 4px; }
-    .task-stream::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
-
-    .task-entry {
-      display: flex; align-items: center; justify-content: space-between; padding: 12px 14px;
-      background: var(--surface-glass-card); border: 1px solid var(--border-subtle); border-radius: 14px; transition: border-color 0.2s;
-    }
-    .task-entry:hover { border-color: var(--border-highlight); }
-    .task-left { display: flex; align-items: center; gap: 12px; flex: 1; cursor: pointer; }
-    
-    .checkbox-round {
-      width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-subtle);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .task-entry.done .checkbox-round { border-color: var(--sakura-accent); background: var(--sakura-accent); }
-    .task-entry.done .task-label { color: var(--text-tertiary); text-decoration: line-through; }
-    
-    .task-label { font-size: 0.85rem; color: var(--text-primary); transition: color 0.2s; }
-    .task-remove-btn {
-      background: none; border: none; color: var(--text-tertiary); cursor: pointer; opacity: 0; transition: opacity 0.2s;
-    }
-    .task-entry:hover .task-remove-btn { opacity: 1; }
-
-    @media (max-width: 820px) {
-      .workspace-wrapper { grid-template-columns: 1fr; margin-top: 4rem; }
-      body { overflow-y: auto; padding-bottom: 2rem; }
-    }
-  </style>
+        @keyframes sparkleFloat {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-40px) translateX(30px); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="zen-glow zen-glow-1"></div>
-  <div class="zen-glow zen-glow-2"></div>
+    <div class="scene">
+        <!-- Sunset Background Element -->
+        <div class="sun"></div>
 
-  <!-- Pure CSS Sakura Petals -->
-  <div class="sakura-stage" id="sakura-stage"></div>
-
-  <!-- Audio Node (Hidden) -->
-  <audio id="audio-engine" loop crossorigin="anonymous"></audio>
-
-  <header class="top-header">
-    <div class="brand-mark">
-      <div class="brand-kanji">桜</div>
-      <span>SAKURA // STUDIO</span>
-    </div>
-    
-    <button class="theme-toggle-btn" id="theme-toggle">
-      <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-    </button>
-  </header>
-
-  <main class="workspace-wrapper">
-    
-    <!-- LEFT CARD: Chrono & Music -->
-    <div class="zen-card">
-      <div class="card-meta">
-        <div class="card-title"><span class="status-dot"></span><span>CHRONO // 集中</span></div>
-      </div>
-
-      <div class="timer-segmented-control">
-        <button class="segment-btn active" onclick="setTimer(25, this)">Focus (25m)</button>
-        <button class="segment-btn" onclick="setTimer(5, this)">Short (5m)</button>
-        <button class="segment-btn" onclick="setTimer(15, this)">Long (15m)</button>
-      </div>
-
-      <div class="timer-numeral" id="timer-val">25:00</div>
-
-      <div class="timer-actions">
-        <button class="primary-pill-btn" id="start-btn" onclick="toggleTimer()">
-          <svg id="timer-play-svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          <span id="start-btn-label">Begin</span>
-        </button>
-        <button class="ghost-icon-btn" onclick="resetTimer()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-        </button>
-      </div>
-
-      <div class="soundscape-module">
-        <div class="track-meta">
-          <div class="track-info">
-            <span class="track-title" id="track-name">Midnight Tokyo Stream</span>
-            <span class="track-sub">Lofi Hip Hop Mix</span>
-          </div>
-          <div class="sound-bars" id="sound-bars">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-          </div>
+        <!-- Center Title Card -->
+        <div class="anime-title-container">
+            <h1 class="anime-title">Be Happy</h>
+            <div class="anime-subtitle">~ You Are Beautiful ~</div>
         </div>
 
-        <div class="player-controls">
-          <div class="track-buttons">
-            <button class="control-btn" onclick="shiftTrack(-1)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
-            </button>
-            <button class="play-btn-wrapper" id="audio-play-trigger" onclick="togglePlayback()">
-              <svg id="play-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-              <svg id="pause-icon" style="display:none;" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-            </button>
-            <button class="control-btn" onclick="shiftTrack(1)">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
-            </button>
-          </div>
-          <div class="volume-group">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-tertiary);"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-            <input type="range" class="volume-range" id="volume-fader" min="0" max="1" step="0.01" value="0.1">
-          </div>
-        </div>
-      </div>
+        <!-- Tree Branch Silhouette -->
+        <div class="branch"></div>
+
+        <!-- Sakura Petals (15 items) -->
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+
+        <!-- Magic Sparkles / Dust -->
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+
+        <!-- Ground Horizon -->
+        <div class="ground"></div>
     </div>
 
-    <!-- RIGHT CARD: Protocol -->
-    <div class="zen-card">
-      <div class="card-meta">
-        <div class="card-title"><span class="status-dot"></span><span>PROTOCOL // 計画</span></div>
-        <span style="font-size: 0.72rem; color: var(--text-tertiary); font-family: 'JetBrains Mono';" id="task-counter">0/0</span>
-      </div>
-
-      <form class="task-creation-bar" id="task-form">
-        <input type="text" id="task-input" placeholder="Draft next objective..." autocomplete="off" required>
-        <button type="submit" class="add-task-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-        </button>
-      </form>
-
-      <ul class="task-stream" id="task-stream"></ul>
-    </div>
-  </main>
-
-  <script>
-    /* 1. GPU ACCELERATED SAKURA PETALS (Glitch Fix) */
-    function initSakura() {
-      const stage = document.getElementById('sakura-stage');
-      const count = 30; // Optimized count
-      for (let i = 0; i < count; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        const size = Math.random() * 6 + 8; 
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size * 1.3}px`;
-        petal.style.left = `${Math.random() * 100}vw`;
-        petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
-        petal.style.animationDelay = `${Math.random() * -10}s`;
-        stage.appendChild(petal);
-      }
-    }
-    initSakura();
-
-    /* 2. AUDIO ENGINE (FIXED DIRECT LINKS) */
-    const audio = document.getElementById('audio-engine');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    const soundBars = document.getElementById('sound-bars');
-    const trackName = document.getElementById('track-name');
-
-    // Super reliable direct raw files hosted on Github for these demos
-    const library = [
-      { title: "Midnight Tokyo Stream", src: "https://raw.githubusercontent.com/misterr-coder/lofi-player/main/music/lofi-1.mp3" },
-      { title: "Quiet Studies", src: "https://raw.githubusercontent.com/misterr-coder/lofi-player/main/music/lofi-2.mp3" },
-      { title: "Wabi-Sabi Evening", src: "https://raw.githubusercontent.com/misterr-coder/lofi-player/main/music/lofi-3.mp3" }
-    ];
-
-    let currentTrack = 0;
-    let isPlaying = false;
-    audio.src = library[currentTrack].src;
-    audio.volume = 0.1;
-
-    function togglePlayback() {
-      if (isPlaying) {
-        audio.pause();
-        setPlayState(false);
-      } else {
-        audio.play().then(() => {
-          setPlayState(true);
-        }).catch(err => {
-          console.log("Browser blocked autoplay. Please click again.", err);
-          alert("Click OK and press Play again to start music.");
-        });
-      }
-    }
-
-    function setPlayState(playing) {
-      isPlaying = playing;
-      if (playing) {
-        playIcon.style.display = "none";
-        pauseIcon.style.display = "block";
-        soundBars.classList.add('playing');
-      } else {
-        playIcon.style.display = "block";
-        pauseIcon.style.display = "none";
-        soundBars.classList.remove('playing');
-      }
-    }
-
-    function shiftTrack(delta) {
-      currentTrack = (currentTrack + delta + library.length) % library.length;
-      audio.src = library[currentTrack].src;
-      trackName.textContent = library[currentTrack].title;
-      if (isPlaying) {
-        audio.play().catch(()=>{});
-      }
-    }
-
-    document.getElementById('volume-fader').addEventListener('input', (e) => {
-      audio.volume = e.target.value;
-    });
-    audio.addEventListener('ended', () => shiftTrack(1)); // Auto-play next track
-
-    /* 3. TIMER SYSTEM */
-    let totalSecs = 25 * 60;
-    let currentSecs = 25 * 60;
-    let timerHandle = null;
-    let timerRunning = false;
-    
-    const display = document.getElementById('timer-val');
-    const startBtnLbl = document.getElementById('start-btn-label');
-    const timerPlaySvg = document.getElementById('timer-play-svg');
-
-    function renderDisplay() {
-      const m = Math.floor(currentSecs / 60);
-      const s = currentSecs % 60;
-      display.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-    }
-
-    function toggleTimer() {
-      if (timerRunning) {
-        clearInterval(timerHandle);
-        startBtnLbl.textContent = "Resume";
-        timerPlaySvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
-      } else {
-        timerHandle = setInterval(() => {
-          if (currentSecs > 0) {
-            currentSecs--;
-            renderDisplay();
-          } else {
-            clearInterval(timerHandle);
-            timerRunning = false;
-            startBtnLbl.textContent = "Begin";
-            timerPlaySvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
-            alert("Session Complete!");
-          }
-        }, 1000);
-        startBtnLbl.textContent = "Pause";
-        timerPlaySvg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-      }
-      timerRunning = !timerRunning;
-    }
-
-    function resetTimer() {
-      clearInterval(timerHandle);
-      timerRunning = false;
-      currentSecs = totalSecs;
-      startBtnLbl.textContent = "Begin";
-      timerPlaySvg.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
-      renderDisplay();
-    }
-
-    function setTimer(mins, elem) {
-      document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
-      elem.classList.add('active');
-      totalSecs = mins * 60;
-      resetTimer();
-    }
-
-    /* 4. TASK PROTOCOL */
-    let tasks = [
-    ];
-    
-    function renderTasks() {
-      const stream = document.getElementById('task-stream');
-      stream.innerHTML = '';
-      tasks.forEach(t => {
-        const li = document.createElement('li');
-        li.className = `task-entry ${t.done ? 'done' : ''}`;
-        li.innerHTML = `
-          <div class="task-left" onclick="toggleTask(${t.id})">
-            <div class="checkbox-round">
-              ${t.done ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
-            </div>
-            <span class="task-label">${t.text}</span>
-          </div>
-          <button class="task-remove-btn" onclick="removeTask(${t.id})">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
-        `;
-        stream.appendChild(li);
-      });
-      document.getElementById('task-counter').textContent = `${tasks.filter(t=>t.done).length}/${tasks.length}`;
-    }
-
-    document.getElementById('task-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = document.getElementById('task-input');
-      if (input.value.trim()) {
-        tasks.unshift({ id: Date.now(), text: input.value.trim(), done: false });
-        input.value = '';
-        renderTasks();
-      }
-    });
-
-    window.toggleTask = (id) => { tasks = tasks.map(t => t.id === id ? {...t, done: !t.done} : t); renderTasks(); };
-    window.removeTask = (id) => { tasks = tasks.filter(t => t.id !== id); renderTasks(); };
-    renderTasks();
-
-    /* 5. THEME TOGGLE */
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('silk-mode');
-      const icon = document.getElementById('theme-icon');
-      if(document.body.classList.contains('silk-mode')) {
-        icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-      } else {
-        icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-      }
-    });
-  </script>
 </body>
 </html>
