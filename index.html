@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Motivation Loop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anime Welcome Animation Loop</title>
     <style>
         * {
             box-sizing: border-box;
@@ -15,231 +15,142 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(135deg, #1b0c36, #4a3575, #7597de);
+            background: linear-gradient(135deg, #1a1c29, #382c56, #5c437a);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .scene {
+        .welcome-scene {
             position: relative;
             width: 100vw;
             height: 100vh;
-            width: 100dvh; /* Mobile screen fix */
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+            box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
         }
 
-        /* Anime Sunset Glow (Responsive sizing) */
-        .sun {
+        /* Glowing Welcome Orb Background */
+        .welcome-orb {
             position: absolute;
-            top: 12%;
-            left: 15%;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, #ffecd2 0%, #fcb69f 70%, #ff8576 100%);
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(255,182,193,0.4) 0%, rgba(138,43,226,0.15) 70%, transparent 100%);
             border-radius: 50%;
-            box-shadow: 0 0 50px #fcb69f, 0 0 90px rgba(252, 182, 159, 0.4);
-            animation: sunGlow 5s ease-in-out infinite alternate;
+            animation: orbPulse 4s ease-in-out infinite alternate;
+            z-index: 1;
         }
 
-        @media (min-width: 768px) {
-            .sun {
-                width: 140px;
-                height: 140px;
-                top: 15%;
-                left: 20%;
-            }
-        }
-
-        /* Center Motivational Title Card (Mobile Friendly text) */
-        .anime-title-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+        /* Central Glassmorphism Card for Welcome Message */
+        .welcome-card {
+            position: relative;
             z-index: 10;
-            pointer-events: none;
-            width: 90%;
-            padding: 0 10px;
+            text-align: center;
+            padding: 30px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 182, 193, 0.2);
+            animation: cardFloat 3s ease-in-out infinite alternate;
+            max-width: 85%;
         }
 
-        .anime-title {
+        /* Main Welcome Heading */
+        .welcome-title {
             color: #ffffff;
-            font-size: 2.2rem;
-            font-weight: 400;
+            font-size: 8vw;
+            font-weight: 800;
             letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(255, 183, 197, 0.9), 0 0 30px rgba(255, 255, 255, 0.5);
-            animation: titlePulse 4s ease-in-out infinite alternate;
             margin: 0;
+            background: linear-gradient(to right, #ffb7c5, #ffdfba, #b4d2e7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 183, 197, 0.5);
+            animation: textGlow 3s ease-in-out infinite alternate;
         }
 
-        .anime-subtitle {
-            color: #ffb7c5;
-            font-size: 0.85rem;
+        /* Subtitle / Greeting Message */
+        .welcome-subtitle {
+            color: #e2d9f3;
+            font-size: 3.5vw;
             letter-spacing: 3px;
             margin-top: 12px;
-            text-shadow: 0 0 10px rgba(255, 183, 197, 0.7);
-            opacity: 0.9;
             text-transform: uppercase;
+            opacity: 0.9;
         }
 
-        @media (min-width: 768px) {
-            .anime-title {
-                font-size: 3.8rem;
-                letter-spacing: 6px;
-            }
-            .anime-subtitle {
-                font-size: 1.1rem;
-                letter-spacing: 5px;
-            }
-        }
-
-        /* Falling Sakura Petals */
-        .petal {
-            position: absolute;
-            background: #ffb7c5;
-            border-radius: 150% 0 150% 0;
-            animation: fall linear infinite;
-            opacity: 0.85;
-            box-shadow: 0 0 5px rgba(255, 183, 197, 0.5);
-        }
-
-        /* Petal configs */
-        .petal:nth-child(1) { left: 5%; width: 14px; height: 10px; animation-duration: 6s; animation-delay: 0s; }
-        .petal:nth-child(2) { left: 15%; width: 10px; height: 7px; animation-duration: 4s; animation-delay: 2s; }
-        .petal:nth-child(3) { left: 25%; width: 16px; height: 12px; animation-duration: 7s; animation-delay: 1s; }
-        .petal:nth-child(4) { left: 35%; width: 12px; height: 8px; animation-duration: 5s; animation-delay: 3s; }
-        .petal:nth-child(5) { left: 45%; width: 15px; height: 11px; animation-duration: 6.5s; animation-delay: 0.5s; }
-        .petal:nth-child(6) { left: 55%; width: 11px; height: 8px; animation-duration: 4.5s; animation-delay: 2.5s; }
-        .petal:nth-child(7) { left: 65%; width: 13px; height: 9px; animation-duration: 5.5s; animation-delay: 4s; }
-        .petal:nth-child(8) { left: 75%; width: 10px; height: 7px; animation-duration: 7.5s; animation-delay: 1.5s; }
-        .petal:nth-child(9) { left: 85%; width: 15px; height: 10px; animation-duration: 5s; animation-delay: 3.5s; }
-        .petal:nth-child(10) { left: 92%; width: 12px; height: 8px; animation-duration: 6s; animation-delay: 0.8s; }
-
-        /* Magic Wind Sparkles */
+        /* Floating Sparkles / Stars */
         .sparkle {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
             animation: sparkleFloat 3s linear infinite;
-            opacity: 0.6;
+            opacity: 0.7;
+            z-index: 2;
         }
 
-        .sparkle:nth-child(11) { left: 20%; top: 40%; width: 3px; height: 3px; animation-delay: 0s; }
-        .sparkle:nth-child(12) { left: 50%; top: 30%; width: 2px; height: 2px; animation-delay: 1s; }
-        .sparkle:nth-child(13) { left: 75%; top: 50%; width: 4px; height: 4px; animation-delay: 2s; }
-        .sparkle:nth-child(14) { left: 30%; top: 70%; width: 2px; height: 2px; animation-delay: 1.5s; }
+        .sparkle:nth-child(1) { left: 20%; top: 25%; width: 4px; height: 4px; animation-delay: 0s; }
+        .sparkle:nth-child(2) { left: 80%; top: 20%; width: 3px; height: 3px; animation-delay: 1s; }
+        .sparkle:nth-child(3) { left: 15%; top: 75%; width: 3px; height: 3px; animation-delay: 2s; }
+        .sparkle:nth-child(4) { left: 85%; top: 70%; width: 5px; height: 5px; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { left: 50%; top: 15%; width: 2px; height: 2px; animation-delay: 0.5s; }
 
-        /* Responsive Tree Branch Silhouette */
-        .branch {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 280px;
-            height: 180px;
-            background: #130a21;
-            clip-path: polygon(100% 0, 75% 0, 35% 25%, 10% 55%, 0 62%, 0 72%, 15% 62%, 45% 35%, 85% 8%, 100% 8%);
-        }
-
+        /* Media Queries for Desktop / Larger Screens */
         @media (min-width: 768px) {
-            .branch {
-                width: 550px;
-                height: 300px;
-            }
+            .welcome-card { padding: 40px 60px; }
+            .welcome-title { font-size: 3.5rem; letter-spacing: 6px; }
+            .welcome-subtitle { font-size: 1.1rem; letter-spacing: 4px; }
+            .welcome-orb { width: 450px; height: 450px; }
         }
 
-        /* Ground Horizon */
-        .ground {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 80px;
-            background: linear-gradient(to top, #0b0514, #130a21);
-            border-top: 2px solid rgba(255, 183, 197, 0.1);
+        /* Keyframes Animations */
+        @keyframes orbPulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 1; }
         }
 
-        @media (min-width: 768px) {
-            .ground {
-                height: 120px;
-            }
+        @keyframes cardFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-12px); }
         }
 
-        /* Keyframes */
-        @keyframes fall {
-            0% {
-                top: -10%;
-                transform: translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(80px) translateY(50vh) rotate(180deg);
-            }
-            85% {
-                opacity: 1;
-            }
-            100% {
-                top: 110%;
-                transform: translateX(-40px) translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes sunGlow {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 70px #fcb69f, 0 0 120px rgba(252, 182, 159, 0.6); }
-        }
-
-        @keyframes titlePulse {
-            0% { text-shadow: 0 0 10px rgba(255, 183, 197, 0.6), 0 0 20px rgba(255, 255, 255, 0.3); transform: scale(1); }
-            100% { text-shadow: 0 0 20px rgba(255, 183, 197, 1), 0 0 40px rgba(255, 255, 255, 0.7); transform: scale(1.02); }
+        @keyframes textGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 183, 197, 0.4)); }
+            100% { filter: drop-shadow(0 0 15px rgba(255, 183, 197, 0.9)); }
         }
 
         @keyframes sparkleFloat {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-30px) translateX(20px); opacity: 0; }
+            0% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0; }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { transform: translateY(-40px) translateX(20px) scale(0.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="scene">
-        <!-- Sunset Background Element -->
-        <div class="sun"></div>
+    <div class="welcome-scene">
+        <!-- Glowing Background Orb -->
+        <div class="welcome-orb"></div>
 
-        <!-- Motivational Center Title Card -->
-        <div class="anime-title-container">
-            <h1 class="anime-title">Stay Motivated</h1>
-            <div class="anime-subtitle">~ Push Your Limits ~</div>
+        <!-- Floating Magic Sparkles -->
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+
+        <!-- Central Welcome Card -->
+        <div class="welcome-card">
+            <h1 class="welcome-title">Welcome</h1>
+            <div class="welcome-subtitle">~ Glad to have you here ~</div>
         </div>
-
-        <!-- Tree Branch Silhouette -->
-        <div class="branch"></div>
-
-        <!-- Sakura Petals -->
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-
-        <!-- Magic Sparkles -->
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-
-        <!-- Ground Horizon -->
-        <div class="ground"></div>
     </div>
 
 </body>
